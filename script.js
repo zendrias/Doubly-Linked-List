@@ -1,14 +1,10 @@
 class ListNode {
   constructor(data) {
+    this.data = data
     this.next = null
     this.previous = null
-    this.data = data
   }
 }
-
-
-
-
 class DoublyLinkedList {
   constructor() {
     this.head = null;
@@ -30,4 +26,29 @@ class DoublyLinkedList {
     this.length++
     return this
   }
+
+  pop() {
+    if (!this.head) return undefined;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return this;
+    };
+    const oldTail = this.tail;
+    this.tail = oldTail.previous
+    this.tail.next = null;
+    oldTail.previous = null;
+    this.length--;
+    return oldTail;
+  }
+
 }
+
+const ll = new DoublyLinkedList()
+
+ll.push(100)
+ll.push(200)
+ll.pop()
+ll.push(200)
+console.log(ll)
