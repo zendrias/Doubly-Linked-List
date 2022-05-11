@@ -43,12 +43,23 @@ class DoublyLinkedList {
     return oldTail;
   }
 
+  shift() {
+    if (!this.head) return undefined
+    if (this.length === 1) return this.pop()
+    const oldHead = this.head
+    this.head = oldHead.next
+    this.head.previous = null
+    oldHead.next = null
+    this.length--
+    return oldHead
+  }
+
 }
 
 const ll = new DoublyLinkedList()
 
 ll.push(100)
 ll.push(200)
-ll.pop()
-ll.push(200)
+ll.push(300)
+ll.shift()
 console.log(ll)
