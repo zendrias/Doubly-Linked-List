@@ -54,6 +54,15 @@ class DoublyLinkedList {
     return oldHead
   }
 
+  unshift(data) {
+    const node = new ListNode(data)
+    if (!this.head) return this.push()
+    this.head.previous = node
+    node.next = this.head
+    this.head = node
+    this.length++
+    return this;
+  }
 }
 
 const ll = new DoublyLinkedList()
@@ -62,4 +71,5 @@ ll.push(100)
 ll.push(200)
 ll.push(300)
 ll.shift()
+ll.unshift(150)
 console.log(ll)
