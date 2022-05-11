@@ -128,12 +128,13 @@ class DoublyLinkedList {
     if (index === (this.length - 1)) return this.pop();
     if (index === 0) return this.shift();
 
-    const prev = this.get(index - 1)
     const current = this.get(index)
+    const prev = this.get(index - 1)
     const after = this.get(index + 1)
 
     prev.next = after, after.prev = prev
     current.next = null, current.prev = null
+    this.length--
     return current
   }
 }
