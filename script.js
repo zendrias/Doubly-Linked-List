@@ -10,7 +10,7 @@ class DoublyLinkedList {
     this.head = null;
     this.tail = null;
     this.length = 0;
-  }
+  };
 
   push(data) {
     const node = new ListNode(data)
@@ -52,7 +52,7 @@ class DoublyLinkedList {
     oldHead.next = null
     this.length--
     return oldHead
-  }
+  };
 
   unshift(data) {
     const node = new ListNode(data)
@@ -62,22 +62,21 @@ class DoublyLinkedList {
     this.head = node
     this.length++
     return this;
-  }
+  };
 
   get(index) {
     if (index < 0 || index > this.length || !this.head) return undefined
     let count = 0
     if (index > this.length / 2) {
-      console.log('end')
       let current = this.tail
-      let i = this.length - index
+      let i = this.length - (index + 1)
       while (count < i) {
         current = current.previous
         count++
       }
       return current
     } else {
-      console.log('start')
+      console.log('here')
       let current = this.head
       while (count < index) {
         current = current.next
@@ -85,17 +84,52 @@ class DoublyLinkedList {
       }
       return current
     }
-  }
+  };
+
+  set(index, data) {
+    if (!this.get(index)) return false;
+    const node = this.get(index);
+    node.data = data;
+    return true;
+  };
+
+  logData() {
+    let current = this.head
+    while (current) {
+      console.log(current.data)
+      current = current.next
+    }
+  };
+
+  insert(index, data) {
+    if (!this.head) return undefined;
+    const node = new ListNode(data);
+    let current = this.head;
+    let previous;
+    let count = 0;
+    while (count < index) {
+      previous = current;
+      current = current.next;
+      count++;
+    };
+    previous.next = node;
+    node.previous = previous;
+    current.previous = node;
+    node.next = current;
+    return this;
+
+  };
 }
 
 const ll = new DoublyLinkedList()
 
+ll.push(0)
 ll.push(100)
 ll.push(200)
-ll.push(300)
+ll.push(900)
 ll.push(400)
 ll.push(500)
 ll.push(600)
-ll.unshift(0)
-ll.get(3)
-console.log(ll)
+ll.set(3, 300)
+ll.logData()
+// console.log(ll)
